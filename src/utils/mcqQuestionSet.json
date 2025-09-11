@@ -1,0 +1,112 @@
+[
+  {
+    "id": "focus_1",
+    "question": "Which study technique involves studying for 25 minutes followed by a 5-minute break?",
+    "options": [
+      "Feynman Technique",
+      "Pomodoro Technique",
+      "Cornell Note-taking",
+      "SQ3R Method"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The Pomodoro Technique uses 25-minute focused work sessions followed by short 5-minute breaks."
+  },
+  {
+    "id": "focus_2",
+    "question": "What is the most effective way to improve long-term retention of information?",
+    "options": [
+      "Cramming the night before",
+      "Reading the same material multiple times",
+      "Spaced repetition over time",
+      "Highlighting important text"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Spaced repetition, reviewing material at increasing intervals, is scientifically proven to improve long-term retention."
+  },
+  {
+    "id": "focus_3",
+    "question": "Which of these is a sign that you're in a focused study state?",
+    "options": [
+      "Frequently checking your phone",
+      "Losing track of time while studying",
+      "Feeling restless and fidgety",
+      "Thinking about other tasks"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When deeply focused, you often experience 'flow state' where time seems to pass quickly without notice."
+  },
+  {
+    "id": "focus_4",
+    "question": "What should you do first when you sit down to study?",
+    "options": [
+      "Check social media one last time",
+      "Set a specific goal for the session",
+      "Start with the hardest material",
+      "Organize your entire study space"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Setting a clear, specific goal helps focus your mind and makes your study session more purposeful and effective."
+  },
+  {
+    "id": "focus_5",
+    "question": "How often should you take breaks during long study sessions?",
+    "options": [
+      "Only when you feel tired",
+      "Every 15-20 minutes",
+      "Every 45-60 minutes",
+      "Once every 3 hours"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Research shows that taking breaks every 45-60 minutes helps maintain focus and prevents mental fatigue."
+  },
+  {
+    "id": "focus_6",
+    "question": "Which environment is best for maintaining focus while studying?",
+    "options": [
+      "A busy coffee shop with background noise",
+      "Your bed with comfortable pillows",
+      "A consistent, dedicated study space",
+      "Different locations to keep things interesting"
+    ],
+    "correctAnswer": 2,
+    "explanation": "A consistent, dedicated study space helps your brain associate that environment with focused work, improving concentration."
+  },
+  {
+    "id": "focus_7",
+    "question": "What is 'active recall' in studying?",
+    "options": [
+      "Reading notes repeatedly",
+      "Highlighting important information",
+      "Testing yourself without looking at notes",
+      "Copying notes multiple times"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Active recall involves testing yourself on material without looking at your notes, which strengthens memory pathways."
+  },
+  {
+    "id": "focus_8",
+    "question": "When is the best time to review material you just learned?",
+    "options": [
+      "Immediately after learning it",
+      "One week later",
+      "The night before the exam",
+      "Within 24 hours"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Reviewing material within 24 hours helps consolidate it in long-term memory before forgetting begins to accelerate."
+  },
+  {
+    "id": "math_1",
+    "question": "What is 15% of 240?",
+    "options": ["36", "35", "30", "40"],
+    "correctAnswer": 0,
+    "explanation": "15% of 240 = 0.15 × 240 = 36"
+  },
+  {
+    "id": "science_1",
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Go", "Gd", "Au", "Ag"],
+    "correctAnswer": 2,
+    "explanation": "The chemical symbol for gold is Au, derived from the Latin word 'aurum'."
+  }
+]
