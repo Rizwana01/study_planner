@@ -3,7 +3,7 @@ import { Timer } from '../components/Timer';
 import { MCQPopup } from '../components/MCQPopup';
 import { WebcamCapture } from '../components/WebcamCapture';
 import { StorageService } from '../services/StorageService';
-import { mcqQuestions } from '../utils/mcqQuestionSet';
+import mcqQuestions from '../utils/mcqQuestionSet.json';
 
 export const TrackerPage: React.FC = () => {
   const [duration, setDuration] = useState(25); // Default Pomodoro
