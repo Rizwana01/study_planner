@@ -14,7 +14,11 @@ interface Task {
   createdAt: string;
 }
 
-export const PlannerPage: React.FC = () => {
+interface PlannerPageProps {
+  user: any;
+}
+
+export const PlannerPage: React.FC<PlannerPageProps> = ({ user }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -28,8 +32,11 @@ export const PlannerPage: React.FC = () => {
   });
 
   useEffect(() => {
+    if (user) {
+      StorageService.setCurrentUser(user.id);
+    }
     loadTasks();
-  }, []);
+  }, [user]);
 
   const loadTasks = () => {
     const savedTasks = StorageService.getTasks();

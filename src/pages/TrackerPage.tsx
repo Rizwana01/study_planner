@@ -5,7 +5,11 @@ import { WebcamCapture } from '../components/WebcamCapture';
 import { StorageService } from '../services/StorageService';
 import mcqQuestions from '../utils/mcqQuestionSet.json';
 
-export const TrackerPage: React.FC = () => {
+interface TrackerPageProps {
+  user: any;
+}
+
+export const TrackerPage: React.FC<TrackerPageProps> = ({ user }) => {
   const [duration, setDuration] = useState(25); // Default Pomodoro
   const [selectedSubject, setSelectedSubject] = useState('');
   const [subjects] = useState(['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English', 'History', 'Computer Science']);
@@ -14,6 +18,14 @@ export const TrackerPage: React.FC = () => {
   const [showWebcam, setShowWebcam] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
   const [mcqInterval, setMCQInterval] = useState<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      StorageService.setCurrentUser(user.id);
+      // Set default duration from user preferences
+      setDuration(user.preferences?.studySettings?.defaultSessionDuration || 25);
+    }
+  }, [user]);
 
   // Visibility change detection for focus tracking
   useEffect(() => {

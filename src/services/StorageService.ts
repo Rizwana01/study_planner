@@ -31,36 +31,45 @@ export class StorageService {
   private static readonly SESSIONS_KEY = 'study-planner-sessions';
   private static readonly SETTINGS_KEY = 'study-planner-settings';
   private static readonly SELFIES_KEY = 'study-planner-selfies';
+  private static currentUserId: string | null = null;
+
+  static setCurrentUser(userId: string): void {
+    this.currentUserId = userId;
+  }
+
+  private static getUserKey(baseKey: string): string {
+    return this.currentUserId ? `${baseKey}-${this.currentUserId}` : baseKey;
+  }
 
   static init(): void {
     // Initialize storage if not exists
-    if (!localStorage.getItem(this.TASKS_KEY)) {
-      localStorage.setItem(this.TASKS_KEY, JSON.stringify([]));
+    if (!localStorage.getItem(this.getUserKey(this.TASKS_KEY))) {
+      localStorage.setItem(this.getUserKey(this.TASKS_KEY), JSON.stringify([]));
     }
-    if (!localStorage.getItem(this.SESSIONS_KEY)) {
-      localStorage.setItem(this.SESSIONS_KEY, JSON.stringify([]));
+    if (!localStorage.getItem(this.getUserKey(this.SESSIONS_KEY))) {
+      localStorage.setItem(this.getUserKey(this.SESSIONS_KEY), JSON.stringify([]));
     }
-    if (!localStorage.getItem(this.SETTINGS_KEY)) {
-      localStorage.setItem(this.SETTINGS_KEY, JSON.stringify({
+    if (!localStorage.getItem(this.getUserKey(this.SETTINGS_KEY))) {
+      localStorage.setItem(this.getUserKey(this.SETTINGS_KEY), JSON.stringify({
         darkMode: false,
         notificationsEnabled: true,
       }));
     }
-    if (!localStorage.getItem(this.SELFIES_KEY)) {
-      localStorage.setItem(this.SELFIES_KEY, JSON.stringify([]));
+    if (!localStorage.getItem(this.getUserKey(this.SELFIES_KEY))) {
+      localStorage.setItem(this.getUserKey(this.SELFIES_KEY), JSON.stringify([]));
     }
   }
 
   // Task Management
   static getTasks(): Task[] {
-    const tasks = localStorage.getItem(this.TASKS_KEY);
+    const tasks = localStorage.getItem(this.getUserKey(this.TASKS_KEY));
     return tasks ? JSON.parse(tasks) : [];
   }
 
   static addTask(task: Task): void {
     const tasks = this.getTasks();
     tasks.push(task);
-    localStorage.setItem(this.TASKS_KEY, JSON.stringify(tasks));
+    localStorage.setItem(this.getUserKey(this.TASKS_KEY), JSON.stringify(tasks));
   }
 
   static updateTask(updatedTask: Task): void {
@@ -68,14 +77,14 @@ export class StorageService {
     const index = tasks.findIndex(task => task.id === updatedTask.id);
     if (index !== -1) {
       tasks[index] = updatedTask;
-      localStorage.setItem(this.TASKS_KEY, JSON.stringify(tasks));
+      localStorage.setItem(this.getUserKey(this.TASKS_KEY), JSON.stringify(tasks));
     }
   }
 
   static deleteTask(taskId: string): void {
     const tasks = this.getTasks();
     const filteredTasks = tasks.filter(task => task.id !== taskId);
-    localStorage.setItem(this.TASKS_KEY, JSON.stringify(filteredTasks));
+    localStorage.setItem(this.getUserKey(this.TASKS_KEY), JSON.stringify(filteredTasks));
   }
 
   // Study Session Management
@@ -107,7 +116,7 @@ export class StorageService {
       
       const sessions = this.getSessions();
       sessions.push(this.currentSession as StudySession);
-      localStorage.setItem(this.SESSIONS_KEY, JSON.stringify(sessions));
+      localStorage.setItem(this.getUserKey(this.SESSIONS_KEY), JSON.stringify(sessions));
       this.currentSession = null;
     }
   }
@@ -127,12 +136,12 @@ export class StorageService {
 
     const sessions = this.getSessions();
     sessions.push(session);
-    localStorage.setItem(this.SESSIONS_KEY, JSON.stringify(sessions));
+    localStorage.setItem(this.getUserKey(this.SESSIONS_KEY), JSON.stringify(sessions));
     this.currentSession = null;
   }
 
   static getSessions(): StudySession[] {
-    const sessions = localStorage.getItem(this.SESSIONS_KEY);
+    const sessions = localStorage.getItem(this.getUserKey(this.SESSIONS_KEY));
     return sessions ? JSON.parse(sessions) : [];
   }
 
@@ -160,13 +169,13 @@ export class StorageService {
     }
     
     // Also save to selfies collection
-    const selfies = JSON.parse(localStorage.getItem(this.SELFIES_KEY) || '[]');
+    const selfies = JSON.parse(localStorage.getItem(this.getUserKey(this.SELFIES_KEY)) || '[]');
     selfies.push({
       id: Date.now().toString(),
       imageData,
       timestamp: new Date().toISOString()
     });
-    localStorage.setItem(this.SELFIES_KEY, JSON.stringify(selfies));
+    localStorage.setItem(this.getUserKey(this.SELFIES_KEY), JSON.stringify(selfies));
   }
 
   // Analytics
@@ -284,22 +293,22 @@ export class StorageService {
 
   // Settings
   static getSettings() {
-    const settings = localStorage.getItem(this.SETTINGS_KEY);
+    const settings = localStorage.getItem(this.getUserKey(this.SETTINGS_KEY));
     return settings ? JSON.parse(settings) : {};
   }
 
   static updateSettings(newSettings: any) {
     const current = this.getSettings();
     const updated = { ...current, ...newSettings };
-    localStorage.setItem(this.SETTINGS_KEY, JSON.stringify(updated));
+    localStorage.setItem(this.getUserKey(this.SETTINGS_KEY), JSON.stringify(updated));
   }
 
   // Utility method to clear all data (useful for testing)
-  static clearAllData(): void {
-    localStorage.removeItem(this.TASKS_KEY);
-    localStorage.removeItem(this.SESSIONS_KEY);
-    localStorage.removeItem(this.SETTINGS_KEY);
-    localStorage.removeItem(this.SELFIES_KEY);
+  static clearUserData(): void {
+    localStorage.removeItem(this.getUserKey(this.TASKS_KEY));
+    localStorage.removeItem(this.getUserKey(this.SESSIONS_KEY));
+    localStorage.removeItem(this.getUserKey(this.SETTINGS_KEY));
+    localStorage.removeItem(this.getUserKey(this.SELFIES_KEY));
     this.init();
   }
 }

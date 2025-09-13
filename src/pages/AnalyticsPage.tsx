@@ -3,13 +3,20 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { StorageService } from '../services/StorageService';
 import { CalendarIcon, ClockIcon, TrophyIcon, FireIcon } from '@heroicons/react/24/outline';
 
-export const AnalyticsPage: React.FC = () => {
+interface AnalyticsPageProps {
+  user: any;
+}
+
+export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ user }) => {
   const [analytics, setAnalytics] = useState<any>(null);
   const [timeRange, setTimeRange] = useState<'week' | 'month' | 'all'>('week');
 
   useEffect(() => {
+    if (user) {
+      StorageService.setCurrentUser(user.id);
+    }
     loadAnalytics();
-  }, [timeRange]);
+  }, [timeRange, user]);
 
   const loadAnalytics = () => {
     const data = StorageService.getAnalytics(timeRange);

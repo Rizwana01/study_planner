@@ -9,7 +9,11 @@ interface Message {
   timestamp: Date;
 }
 
-export const ChatbotPage: React.FC = () => {
+interface ChatbotPageProps {
+  user: any;
+}
+
+export const ChatbotPage: React.FC<ChatbotPageProps> = ({ user }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -17,8 +21,10 @@ export const ChatbotPage: React.FC = () => {
 
   useEffect(() => {
     // Welcome message
-    addBotMessage("Hi! I'm your Study Coach! 🎓 I'm here to help you stay motivated and provide study tips. How can I help you today?");
-  }, []);
+    if (user) {
+      addBotMessage(`Hi ${user.fullName}! I'm your Study Coach! 🎓 I'm here to help you stay motivated and provide study tips. How can I help you today?`);
+    }
+  }, [user]);
 
   useEffect(() => {
     scrollToBottom();
