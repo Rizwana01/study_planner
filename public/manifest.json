@@ -1,7 +1,7 @@
 {
-  "name": "Study Planner PWA",
+  "name": "Study Planner - Focus, Track, Succeed",
   "short_name": "StudyPlanner",
-  "description": "A comprehensive study planner with focus tracking and analytics",
+  "description": "Boost your productivity with focus tracking, analytics, and AI study assistance",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -26,14 +26,14 @@
     {
       "name": "Start Timer",
       "short_name": "Timer",
-      "description": "Start a focused study session",
+      "description": "Begin your focused study session",
       "url": "/?page=tracker",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "View Analytics", 
       "short_name": "Analytics",
-      "description": "Check your study progress",
+      "description": "Track your study progress and achievements",
       "url": "/?page=analytics",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     }
