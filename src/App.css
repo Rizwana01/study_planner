@@ -54,3 +54,16 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+/* Hide Bolt branding badge */
+[data-testid="bolt-badge"],
+div[style*="position: fixed"][style*="bottom"][style*="right"] {
+  display: none !important;
+}
+
+/* Additional selectors to hide any potential branding */
+.bolt-badge,
+#bolt-badge,
+[class*="bolt-badge"],
+[id*="bolt-badge"] {
+  display: none !important;
+}
